@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>About | E-Library</title>
+    
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {%load static%}
+    <link rel="icon" type="image/x-icon" href="{% static '/logo_site.png' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Inconsolata:wght@200;400&family=Lora&family=Nothing+You+Could+Do&family=Unica+One&family=Smooch+Sans:wght@600&display=swap" rel="stylesheet">
+  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/74b8b254d2.js" crossorigin="anonymous"></script>
+
+  <style>
+    #shelf {
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
+}
+
+/* BOOK BINDINGS */
+.book-bg {
+  overflow: hidden;
+  height: 32rem;
+  margin: 2px;
+  cursor: pointer;
+  transition: margin 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+  filter: grayscale(25%);
+  border-radius: 4px;
+  background: grey;
+  box-shadow: 0 0.5rem 1rem 0rem rgba(0, 0, 0, 0.4);
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-image: linear-gradient(
+    to right,
+    #333,
+    #333 15%,
+    antiquewhite 30%,
+    antiquewhite 70%,
+    #333 85%,
+    #333
+  );
+  border-image-slice: 1;
+  order: 200;
+}
+.book-bg:hover {
+  box-shadow: 0 0.5rem 3rem -0.5rem rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  margin-top: -15px;
+  transform: scale(1.03, 1.03);
+}
+/* END BOOK BINDINGS */
+
+/* BOOK WIDTHS */
+.graphic {
+  width: 6rem;
+}
+.data {
+  width: 5rem;
+}
+.photo {
+  width: 5rem;
+}
+.landscape {
+  width: 6rem;
+}
+.writing {
+  width: 4rem;
+}
+.web {
+  width: 5rem;
+}
+/* END BOOK WIDTHS */
+
+/* TITLE SHADOWS */
+.book h1,
+h2,
+h3,
+h4,
+h5 {
+  text-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.8);
+}
+.web .book h1,
+h3 {
+  text-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.6);
+}
+/* END TITLE SHADOWS */
+
+/* DEFAULT BOOK ATTRIBUTES */
+.book {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  box-shadow: inset -0.35rem 0 0.5rem rgba(0, 0, 0, 0.4),
+    inset 0.35rem 0 0.5rem rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  writing-mode: vertical-rl;
+}
+.contents {
+  opacity: 0;
+}
+/* END DEFAULT BOOK ATTRIBUTES */
+
+/* GRAPHIC DESIGN */
+.graphic .book {
+  align-items: center;
+  background: radial-gradient(
+      ellipse at top,
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.75)
+    ),
+    radial-gradient(ellipse at bottom, rgba(70, 70, 70, 0.5), transparent);
+  font-family: "Unica One", cursive;
+  color: darkorange;
+}
+/* END GRAPHIC DESIGN */
+
+/* DATA VISUALIZATION */
+.data .book {
+  background: radial-gradient(
+      ellipse at top,
+      rgba(50, 10, 87, 0.55),
+      rgba(0, 0, 0, 0.75)
+    ),
+    radial-gradient(ellipse at bottom, rgba(70, 70, 70, 0.5), transparent);
+  font-family: "Smooch Sans", sans-serif;
+  color: rgb(221, 206, 206);
+}
+/* END DATA VISUALIZATION */
+
+/* PHOTOGRAPHY */
+.photo .book {
+  background: radial-gradient(
+      ellipse at top,
+      rgba(189, 147, 189, 0.55),
+      rgba(0, 0, 0, 0.85)
+    ),
+    radial-gradient(ellipse at bottom, rgba(185, 154, 154, 0.5), transparent);
+  font-family: "Nothing You Could Do", cursive;
+  color: #212121;
+}
+/* END PHOTOGRAPHY */
+
+/* LANDSCAPE DESIGN */
+.landscape .book {
+  background: radial-gradient(
+      ellipse at top,
+      rgba(2, 95, 18, 0.55),
+      rgba(0, 0, 0, 0.75)
+    ),
+    radial-gradient(ellipse at bottom, rgba(70, 70, 70, 0.5), transparent);
+  font-family: "Fredericka the Great", cursive;
+  color: rgb(247, 229, 192);
+}
+/* END LANDSCAPE DESIGN */
+
+/* CREATIVE WRITING */
+.writing .book {
+  background: radial-gradient(
+      ellipse at top,
+      rgba(94, 15, 6, 0.76),
+      rgba(0, 0, 0, 0.75)
+    ),
+    radial-gradient(ellipse at bottom, rgba(70, 70, 70, 0.5), transparent);
+  font-family: "Lora", serif;
+  color: rgb(216, 191, 191);
+}
+/* END CREATIVE WRITING */
+
+/* WEB DESIGN */
+.web .book {
+  background: radial-gradient(
+      ellipse at top,
+      rgba(255, 255, 255, 0.63),
+      rgba(0, 0, 0, 0.75)
+    ),
+    radial-gradient(ellipse at bottom, rgba(70, 70, 70, 0.5), transparent);
+  font-family: "Inconsolata", monospace;
+  color: #333;
+}
+/* END WEB DESIGN */
+
+/* OPEN BOOK */
+.book-bg.active {
+  box-shadow: 0 0.5rem 3rem -0.5rem rgba(0, 0, 0, 0.4);
+  position: absolute;
+  width: 61rem;
+  height: 32rem;
+  margin-top: -22px;
+  z-index: 10;
+  border-top-width: 0;
+}
+.contents {
+  display: flex;
+  position: absolute;
+}
+.book-bg.active .contents {
+  background-color: antiquewhite;
+  position: fixed;
+  opacity: 100;
+  width: calc(100% - 50px);
+  height: calc(100% - 50px);
+  border-left-style: double;
+  border-right-style: double;
+  border-left-width: 4px;
+  border-right-width: 4px;
+  border-color: rgb(92, 92, 92);
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: antiquewhite;
+  border-bottom-style: groove;
+  border-bottom-color: rgb(155, 153, 153);
+  border-bottom-width: 2px;
+  color: #333;
+  writing-mode: horizontal-tb;
+  font-family: "Nothing You Could Do", cursive;
+}
+.page {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 4rem);
+  height: calc(100% - 4em);
+  margin: 2rem;
+}
+.page h1,
+h3 {
+  text-shadow: none;
+}
+.is-grid {
+  display: grid;
+  gap: 5px;
+  grid-template: "1fr 1fr 1fr" "1fr 1fr 1fr" "1fr 1fr 1fr";
+}
+.illus {
+  border: 5px solid white;
+  flex: 1;
+  background-size: cover;
+}
+.text {
+  margin: 1rem;
+}
+#page-shading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(30, 30, 30, 0.1),
+    transparent 25%,
+    transparent 30%,
+    rgba(30, 30, 30, 0.3) 48%,
+    rgba(30, 30, 30, 0.4) 50%,
+    transparent 50%,
+    rgba(30, 30, 30, 0.3) 70%,
+    transparent
+  );
+}
+.book-bg.active #book-shading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    transparent 43%,
+    rgba(30, 30, 30, 0.3) 44%,
+    rgba(30, 30, 30, 0.5) 45%,
+    rgba(30, 30, 30, 0.4) 50%,
+    rgba(30, 30, 30, 0.65) 55%,
+    rgba(30, 30, 30, 0.3) 56%,
+    transparent 57%,
+    transparent
+  );
+}
+/* END OPEN BOOK */
+
+/* BACK ARROW */
+#back svg {
+  position: absolute;
+  border: none;
+  width: 2rem;
+  right: 0.25rem;
+  top: 0.125rem;
+  z-index: 10;
+  opacity: 85%;
+  filter: drop-shadow(0px 0px 2px black);
+}
+#back svg:hover {
+  opacity: 100%;
+  filter: drop-shadow(0px 0px 2px whitesmoke);
+}
+/* BACK ARROW */
+
+  </style>
+  
+
+</head>
+  
+<!-- partial:index.partial.html -->
+<body class='bg-dark'>
+  <div class="logo">
+    {%load static%}
+    <a href="/Home"><img src="{% static '/logo_site.png' %}" alt="logo" height="70px"></a>
+    <a href="/Home" class="logo_txt" ><img src="https://see.fontimg.com/api/renderfont4/Gg5D/eyJyIjoiZnMiLCJoIjo4MCwidyI6MTAwMCwiZnMiOjgwLCJmZ2MiOiIjRkJGNkY2IiwiYmdjIjoiI0VGREZERiIsInQiOjF9/RS1MSUJSQVJZ/samarkan-normal.png" alt="Hindi fonts"></a>
+</div>
+  <div id='shelf'>
+    <div class='book-bg landscape'>
+        <div class='book flex-column'>
+          <div id='book-shading'></div>
+          <h5 style='margin-left: 0px; margin-top: -27%; line-height:10%'>The Website Designer</h5>
+          <h1 style='margin-left: 45px; line-height: 1%'>Jaswanth Madiya</h1>
+          <div class='contents'>
+            <div id='back'>
+              <svg viewBox="0 0 512 512" width="100" title="chevron-circle-left">
+                <path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zM142.1 273l135.5 135.5c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L226.9 256l101.6-101.6c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L142.1 239c-9.4 9.4-9.4 24.6 0 34z" />
+              </svg>
+            </div>
+            <div class='page'>
+              <div class='illus' style='background-image: url(https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg)'>
+              </div>
+            </div>
+            <div class='page'>
+              <div>
+                <h1>The Originator!!</h1>
+                <p class='text'>&emsp;Hello, everyone. Thank you for having me. I'm Jaswanth, the creator of this E-Library. This web application is a part of my Full Stack development course, in which I've used the eminent web framework of python, Django.
+                &emsp;Good coming to me, I was a lover of aviation by passion and a computer engineering student by profession. I am doing a Diploma in Computer Engineering right now and was a polyglot in computer languages. I was well interested in implementing Machine Learning and Artificial Intelligence in modern physics and aerodynamics.
+                </p>
+              </div>
+            </div>
+            <div id='page-shading'></div>
+          </div>
+        </div>
+      </div>
+    <div class='book-bg graphic'>
+      <div class='book flex-column'>
+        <div id='book-shading'></div>
+        <h5 style='margin-left: 0px; line-height:10%'>Special Thanks</h5>
+        <h1 style='margin-left: 45px; line-height: 1%'>Abdur Rahman</h1>
+        <div class='contents'>
+          <div id='back'>
+            <svg viewBox="0 0 512 512" width="100" title="chevron-circle-left">
+              <path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zM142.1 273l135.5 135.5c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L226.9 256l101.6-101.6c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L142.1 239c-9.4 9.4-9.4 24.6 0 34z" />
+            </svg>
+          </div>
+          <div class='page'>
+            <div>
+              <h1>Value the Help</h1>
+              <p class='text'>&emsp;Special thanks to my friend, MOHAMMED ABDUR RAHMAN, a skilled and enthusiastic full stack web developer.</p>
+            </div>
+            <div class='illus' style='background-image: url(https://images.theconversation.com/files/222785/original/file-20180612-112602-1n6vzvh.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=675.0&fit=crop)'>
+            </div>
+          </div>
+          <div class='page'>
+            <div class='illus' style='background-image: url(https://assets.weforum.org/article/image/responsive_big_webp_JMF96ETfn1kSViVnUou1Z0XIDwWcPpT5mrPc7-ytpAc.webp)'>
+            </div>
+            <div>
+              <p class='text'>&emsp;I appreciate your help so much with the suggestions and ideas for this website and the valuable time for this project.</p>
+            </div>
+          </div>
+          <div id='page-shading'></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class='book-bg data'>
+        <div class='book'>
+          <div id='book-shading'></div>
+          <h1>Charan Sai, The Logo Designer</h1>
+          <div class='contents'>
+            <div id='back'><svg viewBox="0 0 512 512" width="100" title="chevron-circle-left">
+                <path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zM142.1 273l135.5 135.5c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L226.9 256l101.6-101.6c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L142.1 239c-9.4 9.4-9.4 24.6 0 34z" />
+              </svg></div>
+            <div class='page'>
+              <div class='illus' style='background-image: url(https://thumbs.dreamstime.com/b/graphic-designer-avatar-flat-design-style-illustrating-its-elegant-unique-189056833.jpg)'>
+              </div>
+              <div>
+                <h1 style='margin-top: 1rem'>Chanran Sai</h1>
+                <p class='text'>&emsp;I thank you for giving a delightful logo for the site.</p>
+              </div>
+            </div>
+            <div class='page'>
+              <div>
+                <p class='text'>&emsp; </p>
+              </div>
+              <!-- <div class='illus' style='background-image: url(https://www.kapwing.com/videos/6350253fefbfae00608ac222)'>
+              </div> -->
+              <div style="height: 0; padding-bottom: calc(88.24%); position:relative; width: 100%;"><iframe allow="autoplay; gyroscope;" allowfullscreen height="100%" referrerpolicy="strict-origin" src="https://www.kapwing.com/e/6350253fefbfae00608ac222" style="border:0; height:100%; left:0; overflow:hidden; position:absolute; top:0; width:100%" title="Embedded content made on Kapwing" width="100%"></iframe></div><p style="font-size: 12px; text-align: right;"></p>
+              
+            </div>
+            <div id='page-shading'></div>
+          </div>
+        </div>
+      </div>
+    
+    <div class='book-bg web'>
+      <div class='book'>
+        <div id='book-shading'></div>
+        <h1>Technologies</h1>
+        <h3> Used</h3>
+        <div class='contents'>
+          <div id='back'><svg viewBox="0 0 512 512" width="100" title="chevron-circle-left">
+              <path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zM142.1 273l135.5 135.5c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L226.9 256l101.6-101.6c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L142.1 239c-9.4 9.4-9.4 24.6 0 34z" />
+            </svg></div>
+          <div class='page'>
+            <h1>Web Technologies Used</h1>
+            <p class='text'>&emsp;This is a completely Django-based project which is built from scratch. This website was designed using the various services provided by the Django framework.</p>
+
+            <p class='text'>&emsp;This site is developed as part of a project for educational and knowledge purposes and is not meant for commercial.</p>
+
+            <p class='text'>&emsp;While coming to the front end, it was designed using the eminent front-end languages HTML, CSS, and Js. The pages of this website are designed by various inspiring websites on the internet. </p>            
+
+            <p class='text'>&emsp;</p>
+          </div>
+          <div class='page'>
+            <p class='text'>&emsp;On the other hand, the backend was given pure python based codes as it uses a python framework. The website runs on the PostgresSQL database which is homed by Heroku - a free deployment platform.</p>
+            <div class='illus' style='background-image: url(https://techengage.com/wp-content/uploads/2019/08/Trends-in-web-development.jpg'>
+            </div>
+          </div>
+          <div id='page-shading'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!-- partial -->
+  <script >
+    $(".book-bg").click(function () {
+  $(this).addClass("active");
+});
+
+$("#back svg").click(function () {
+  event.stopPropagation();
+  $(".book-bg").removeClass("active");
+});
+  </script>
+
+</body>
+</html>
